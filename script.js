@@ -1,13 +1,17 @@
 const apiKey = '1b19ddfdac6049a61d87c4d1ee8f58c6';
 const apiUrl = 'https://api.openweathermap.org/data/2.5/weather';
+let isCelsius = true;
 
-document.getElementById('search-btn').addEventListener('click', () => 
-    {const city = document.getElementById('city-input').value;
+document.getElementById('search-btn').addEventListener('click', () =>{
+        isCelsius = !isCelsius; // Toggle unit
+        const city = document.getElementById('city-input').value;
+        if (city){
         fetchWeatherData(city);
+        }
 });
 
 function fetchWeatherData(city){
-    const units = isCelsius ? 'metric' : 'imperial'; Choose units based on toggle
+    const units = isCelsius ? 'metric' : 'imperial'; //Choose units based on toggle
     const url = `${apiUrl}?q=${city}&appid=${apiKey}&units=metric`;
 
     fetch(url)
