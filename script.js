@@ -7,6 +7,7 @@ document.getElementById('search-btn').addEventListener('click', () =>
 });
 
 function fetchWeatherData(city){
+    const units = isCelsius ? 'metric' : 'imperial'; Choose units based on toggle
     const url = `${apiUrl}?q=${city}&appid=${apiKey}&units=metric`;
 
     fetch(url)
@@ -27,12 +28,13 @@ function displayWeatherData(data){
     }
 
     const temperature = data.main.temp;
+    const unitSymbol = isCelsius ? '°C' : '°F'; //Adjust sybol based on unit
     const description = data.weather[0].description;
     const icon = `http://openweathermap.org/img/wn/${data.weather[0].icon}.png`;
 
     document.getElementById('weather-result').innerHTML = `
         <h2>${data.name}</h2>
-        <p>${temperature}°C</p>
+        <p>${temperature}${unitSymbol}</p>
         <p>${description}</p>
         <img src="${icon}" alt="Weather icon">
         `;
